@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link rel="stylesheet" th:href="@{../css/register.css}">
+</head>
+<body>
+<div class="registration-form">
+    <h2>Registration Form</h2>
+    <form id="registrationForm" th:action="@{/register}" method="post">
+        <div class="form-group">
+            <label for="username">Full Name:</label>
+            <input type="text" id="username" name="username" required>
+        </div>
+
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" required>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" required>
+        </div>
+
+        <div>
+            <button type="button" onclick="#">Login</button>
+            <button type="button" onclick="submitForm()">Register</button>
+        </div>
+    </form>
+
+    <div class="message" id="message">
+        <!-- Message will be displayed here -->
+    </div>
+</div>
+
+<script>
+    function submitForm() {
+        // Add your form submission logic here
+        // For demonstration purposes, just show a success message
+        var messageElement = document.getElementById("message");
+        messageElement.innerHTML = "Registration successful!";
+        messageElement.style.display = "block";
+    }
+</script>
+
+</body>
+</html>
