@@ -13,6 +13,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @ComponentScan({"com.attendease.attendease", "com.attendease.attendease.core.repository"})
 public class AttendeaseApplication {
 	public static void main(String[] args) {
+
 		SpringApplication.run(AttendeaseApplication.class, args);
 	}
 }
