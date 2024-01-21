@@ -1,17 +1,17 @@
 package com.attendease.attendease;
 
-import com.attendease.attendease._core.springjdbc.AppDatabase;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.ComponentScan;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication(exclude = {DataSourceAutoConfiguration.class })
+@EnableJpaRepositories("com.attendease.attendease.core.repository")
+@ComponentScan("com.attendease.attendease")
 public class AttendeaseApplication {
-
 	public static void main(String[] args) {
 		SpringApplication.run(AttendeaseApplication.class, args);
-
-		AppDatabase appDatabase = AppDatabase.getInstance();
 	}
-
 }

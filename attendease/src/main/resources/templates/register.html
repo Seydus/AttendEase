@@ -4,47 +4,45 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registration Form</title>
-    <link rel="stylesheet" th:href="@{../css/register.css}">
+    <link rel="stylesheet" th:href="@{/css/register.css}">
 </head>
 <body>
 <div class="registration-form">
+    <div class="message" id="message" th:if="${message != null}">
+        [[${message}]]
+    </div>
+
     <h2>Registration Form</h2>
-    <form id="registrationForm" th:action="@{/register}" method="post">
+
+    <form id="registrationForm"
+          th:action="@{/register}"
+          method="post"
+          role="form"
+          th:object="${user}"
+    >
         <div class="form-group">
             <label for="username">Full Name:</label>
-            <input type="text" id="username" name="username" required>
+            <input th:field="*{name}" type="text" id="username" name="username" required placeholder="Enter your fullname...">
         </div>
 
         <div class="form-group">
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input th:field="*{email}" type="email" id="email" name="email" required placeholder="Enter your email...">
         </div>
 
         <div class="form-group">
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
+            <input th:field="*{password}" type="password" id="password" name="password" required placeholder="Enter your password...">
         </div>
 
         <div>
-            <button type="button" onclick="#">Login</button>
-            <button type="button" onclick="submitForm()">Register</button>
+            <button type="button">Login</button>
+            <input type="submit" value="Register">
         </div>
     </form>
-
-    <div class="message" id="message">
-        <!-- Message will be displayed here -->
-    </div>
 </div>
 
-<script>
-    function submitForm() {
-        // Add your form submission logic here
-        // For demonstration purposes, just show a success message
-        var messageElement = document.getElementById("message");
-        messageElement.innerHTML = "Registration successful!";
-        messageElement.style.display = "block";
-    }
-</script>
+<script th:src="@{/js/register.js}"></script>
 
 </body>
 </html>

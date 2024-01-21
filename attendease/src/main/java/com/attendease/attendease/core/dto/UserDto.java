@@ -1,4 +1,4 @@
-package com.attendease.attendease._core.dto;
+package com.attendease.attendease.core.dto;
 
 public class UserDto {
     private String name;

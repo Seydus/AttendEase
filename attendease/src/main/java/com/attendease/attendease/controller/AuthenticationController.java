@@ -1,7 +1,7 @@
 package com.attendease.attendease.controller;
 
-import com.attendease.attendease._core.dto.UserDto;
-import com.attendease.attendease._core.service.UserService;
+import com.attendease.attendease.core.dto.UserDto;
+import com.attendease.attendease.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
