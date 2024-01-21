@@ -16,14 +16,26 @@ public class AuthenticationController {
     private UserService userService;
 
     @GetMapping("/register")
-    public String getRegistrationPage(@ModelAttribute("user")UserDto userDto) {
+    public String getRegistrationPage(@ModelAttribute("users")UserDto userDto) {
         return "register";
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute("user") UserDto userDto, Model model) {
+    public String saveUser(@ModelAttribute("users") UserDto userDto, Model model) {
         userService.save(userDto);
         model.addAttribute("message", "Registered Successfully!");
-        return "register";
+        return "login";
+    }
+
+    @GetMapping("/login")
+    public String getLoginPage(@ModelAttribute("users")UserDto userDto)
+    {
+        return "login";
+    }
+
+    @PostMapping("/login")
+    public String loginUser(@ModelAttribute("users") UserDto userDto, Model model)
+    {
+        return "login";
     }
 }

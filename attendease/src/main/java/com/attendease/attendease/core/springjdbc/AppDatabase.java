@@ -1,6 +1,6 @@
 package com.attendease.attendease.core.springjdbc;
 
-import com.attendease.attendease.model.User;
+import com.attendease.attendease.model.Users;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -19,7 +19,7 @@ public class AppDatabase {
         return Instance;
     }
 
-    public void OnCreateUser(User users) {
+    public void OnCreateUser(Users users) {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("configs.xml");
         JdbcTemplate jdbcTemplate = ctx.getBean("jdbcTemplate", JdbcTemplate.class);
         String insertSQL = "INSERT INTO users (name, email, password) VALUES (?, ?, ?)";
@@ -30,16 +30,16 @@ public class AppDatabase {
         ctx.close();
     }
 
-    public User OnReadUsers(int id) {
+    public Users OnReadUsers(int id) {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("configs.xml");
         JdbcTemplate jdbcTemplate = ctx.getBean("jdbcTemplate", JdbcTemplate.class);
 
         String selectSQL = "SELECT * FROM users WHERE id = ?";
 
-        User user;
+        Users user;
 
         try {
-            user = jdbcTemplate.queryForObject(selectSQL, new Object[]{id}, new BeanPropertyRowMapper<>(User.class));
+            user = jdbcTemplate.queryForObject(selectSQL, new Object[]{id}, new BeanPropertyRowMapper<>(Users.class));
         } catch (EmptyResultDataAccessException e) {
             user = null;
         }
@@ -49,20 +49,20 @@ public class AppDatabase {
         return user;
     }
 
-    public List<User> OnReadAllUsers() {
+    public List<Users> OnReadAllUsers() {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("configs.xml");
         JdbcTemplate jdbcTemplate = ctx.getBean("jdbcTemplate", JdbcTemplate.class);
 
         String selectSQL = "SELECT * FROM users";
 
-        List<User> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(User.class));
+        List<Users> users = jdbcTemplate.query(selectSQL, new BeanPropertyRowMapper<>(Users.class));
 
         ctx.close();
 
         return users;
     }
 
-    public void OnDeleteUser(User user) {
+    public void OnDeleteUser(Users user) {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("configs.xml");
         JdbcTemplate jdbcTemplate = ctx.getBean("jdbcTemplate", JdbcTemplate.class);
 
@@ -76,7 +76,7 @@ public class AppDatabase {
     }
 
 
-    public void OnUpdateUser(User user) {
+    public void OnUpdateUser(Users user) {
         ClassPathXmlApplicationContext ctx = new ClassPathXmlApplicationContext("configs.xml");
         JdbcTemplate jdbcTemplate = ctx.getBean("jdbcTemplate", JdbcTemplate.class);
 
