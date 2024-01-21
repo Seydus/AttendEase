@@ -1,4 +1,4 @@
-package com.attendease.attendease._core.repositories;
+package com.attendease.attendease.core.repository;
 
 import com.attendease.attendease.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;

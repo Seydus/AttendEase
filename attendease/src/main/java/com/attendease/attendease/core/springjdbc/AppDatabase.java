@@ -1,4 +1,4 @@
-package com.attendease.attendease._core.springjdbc;
+package com.attendease.attendease.core.springjdbc;
 
 import com.attendease.attendease.model.User;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
