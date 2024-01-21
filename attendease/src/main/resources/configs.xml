@@ -9,7 +9,7 @@
 
 
     <!-- Database Configuration -->
-    <bean id="dataSource"
+    <bean id="entityManagerFactory"
           class="org.springframework.jdbc.datasource.DriverManagerDataSource">
         <property name="driverClassName"
                   value="com.mysql.cj.jdbc.Driver" />
