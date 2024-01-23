@@ -15,6 +15,8 @@ import java.io.IOException;
 public class CustomSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+        System.out.println("OnAuthentication was Successful!");
+
         var authorities = authentication.getAuthorities();
         var roles = authorities.stream().map(c -> c.getAuthority()).findFirst();
 

@@ -2,7 +2,7 @@ package com.attendease.attendease.core.service;
 
 import com.attendease.attendease.core.dto.UserDto;
 import com.attendease.attendease.core.repository.UserRepository;
-import com.attendease.attendease.model.Users;
+import com.attendease.attendease.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -16,11 +16,15 @@ public class UserServiceImpl implements UserService {
     private UserRepository userRepository;
     
     @Override
-    public Users save(UserDto userDto) {
-        Users user = new Users(userDto.getName(),
+    public User save(UserDto userDto) {
+        User user = new User(
+                userDto.getUsername(),
+                userDto.getFirstname(),
+                userDto.getLastname(),
                 userDto.getEmail(),
                 passwordEncoder.encode(userDto.getPassword()),
-                userDto.getRole());
+                userDto.getRoleID()
+        );
 
         return userRepository.save(user);
     }
