@@ -1,7 +1,7 @@
 package com.attendease.attendease.core.service;
 
 import com.attendease.attendease.core.repository.UserRepository;
-import com.attendease.attendease.model.Users;
+import com.attendease.attendease.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,7 +15,7 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Users user = userRepository.findByEmail(username);
+        User user = userRepository.findByEmail(username);
 
         if (user == null) {
             throw new UsernameNotFoundException("User not found!");

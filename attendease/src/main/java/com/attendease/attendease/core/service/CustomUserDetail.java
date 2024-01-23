@@ -1,6 +1,7 @@
 package com.attendease.attendease.core.service;
 
-import com.attendease.attendease.model.Users;
+import com.attendease.attendease.model.Role;
+import com.attendease.attendease.model.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,29 +10,39 @@ import java.util.List;
 
 public class CustomUserDetail implements UserDetails {
 
-    private Users user;
+    private User user;
 
-    public CustomUserDetail(Users user) {
+    public CustomUserDetail(User user) {
         this.user = user;
     }
 
+
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(() -> user.getRole());
+        return List.of(() -> user.toString());
     }
 
-    public String getFullname() {
-        return user.getName();
+    @Override
+    public String getUsername() {
+        return user.getUsername();
+    }
+
+    public String getFirstName() {
+        return user.getFirstname();
+    }
+    public String getLastName() {
+        return user.getLastname();
+    }
+
+    public String getEmail()
+    {
+        return user.getEmail();
     }
 
     @Override
     public String getPassword() {
         return user.getPassword();
-    }
-
-    @Override
-    public String getUsername() {
-        return user.getEmail();
     }
 
     @Override

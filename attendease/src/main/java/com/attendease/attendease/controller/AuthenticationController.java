@@ -2,15 +2,19 @@ package com.attendease.attendease.controller;
 
 import com.attendease.attendease.core.dto.UserDto;
 import com.attendease.attendease.core.service.UserService;
+import com.attendease.attendease.model.Role;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.validation.Valid;
 import java.security.Principal;
 
 @Controller
@@ -22,22 +26,24 @@ public class AuthenticationController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/")
-    public String home()
-    {
-        return "home";
+    @ModelAttribute("roleNames")
+    public Role.RoleName[] roleNames() {
+        return Role.RoleName.values();
     }
 
+
     @GetMapping("/register")
-    public String getRegistrationPage(@ModelAttribute("users")UserDto userDto) {
+    public String getRegistrationPage(@ModelAttribute("user") UserDto userDto, Model model) {
+        model.addAttribute("roles", Role.RoleName.values());
         return "register";
     }
 
     @PostMapping("/register")
-    public String saveUser(@ModelAttribute("users") UserDto userDto, Model model) {
-        userService.save(userDto);
-        model.addAttribute("message", "Registered Successfully!");
-        return "login";
+    public String submitRegistrationForm(@ModelAttribute("user") @Valid UserDto userDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "register";
+        }
+        return "redirect:/login";
     }
 
     @GetMapping("/login")
@@ -59,7 +65,7 @@ public class AuthenticationController {
         }
     }
 
-    @GetMapping("user-page")
+    @GetMapping("/user-page")
     public String userPage(Model model, Principal principal)
     {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());
@@ -68,7 +74,7 @@ public class AuthenticationController {
         return "user";
     }
 
-    @GetMapping("admin-page")
+    @GetMapping("/admin-page")
     public  String adminPage(Model model, Principal principal)
     {
         UserDetails userDetails = userDetailsService.loadUserByUsername(principal.getName());

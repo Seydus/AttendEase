@@ -1,25 +1,39 @@
-package com.attendease.attendease.core.dto;
+package com.attendease.attendease.model;
 
-import com.attendease.attendease.model.Role;
-import org.antlr.v4.runtime.misc.NotNull;
-import org.springframework.lang.Nullable;
+import jakarta.persistence.*;
 
-public class UserDto {
+@Entity
+public class User {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long userID;
     private String username;
     private String firstname;
     private String lastname;
     private String email;
     private String password;
-    @Nullable
-    private int roleID = 0;
+    private int roleID;
 
-    public UserDto(String username, String firstname, String lastname, String email, String password, int roleID) {
+    public User()
+    {
+        super();
+    }
+
+    public User(String username, String firstName, String lastName, String email, String password, int roleID) {
         this.username = username;
-        this.firstname = firstname;
-        this.lastname = lastname;
+        this.firstname = firstName;
+        this.lastname = lastName;
         this.email = email;
         this.password = password;
         this.roleID = roleID;
+    }
+
+    public Long getUserID() {
+        return userID;
+    }
+
+    public void setUserID(Long userID) {
+        this.userID = userID;
     }
 
     public String getUsername() {
